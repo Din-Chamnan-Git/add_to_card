@@ -1,4 +1,8 @@
+import 'package:demo_add_to_card/product.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'myitem.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -26,33 +30,26 @@ class Homepage extends StatelessWidget {
                       fontWeight: FontWeight.bold), // Styling the text
                 ),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(
-                    4, // Number of items
-                    (index) => Card(
-                      elevation: 5,
-                      margin:
-                          const EdgeInsets.all(8.0), // Adds space between cards
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            "assets/potato.png",
-                            width: 150, // Set the width of the image
-                            height: 150, // Set the height of the image
-                            fit: BoxFit.cover, // Makes the image fit nicely
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.add),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              )
+              Expanded(child: Consumer<ProductModel>(
+                builder: (context, value, child) {
+                  return GridView.builder(
+                    itemCount: value.listProducts.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Myitem(
+                          itemName: value.listProducts[index][0],
+                          price: value.listProducts[index][1],
+                          imagepart: value.listProducts[index][2],
+                        ),
+                      );
+                    },
+                  );
+                },
+              )),
             ],
           ),
         ),
