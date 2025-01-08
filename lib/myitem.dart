@@ -17,7 +17,7 @@ class Myitem extends StatelessWidget {
         color: Colors
             .deepOrangeAccent.shade100, // Softer color for better contrast
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 6,
