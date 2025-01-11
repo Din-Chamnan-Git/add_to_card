@@ -1,4 +1,6 @@
+import 'package:demo_add_to_card/product.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Myitem extends StatelessWidget {
   final String itemName;
@@ -30,10 +32,12 @@ class Myitem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Center(
-            child: Image.asset(
-              imagepart,
-              height: 65,
+          Expanded(
+            child: Center(
+              child: Image.asset(
+                imagepart,
+                height: 65,
+              ),
             ),
           ),
           const SizedBox(height: 8), // Add spacing between image and text
@@ -58,6 +62,10 @@ class Myitem extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
+                  Provider.of<ProductModel>(context, listen: false)
+                      .addToCard(itemName, price, imagepart);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("$itemName added Already !!")));
                   // Add your action here
                 },
                 icon: const Icon(

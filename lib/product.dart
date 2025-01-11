@@ -8,5 +8,13 @@ class ProductModel extends ChangeNotifier {
     ["EggPlant", 1.3, "assets/eggPlant.png"],
   ];
 
+  final List<Map<String, dynamic>> _card = [];
   get listProducts => _listProduts;
+
+  List<Map<String, dynamic>> get card => _card;
+
+  void addToCard(String itemName, double price, String imagepart) {
+    _card.add({"name": itemName, "price": price, "image": imagepart});
+    notifyListeners();
+  }
 }

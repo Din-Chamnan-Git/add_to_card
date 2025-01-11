@@ -1,3 +1,4 @@
+import 'package:demo_add_to_card/ShoppingCard.dart';
 import 'package:demo_add_to_card/product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,23 @@ class Homepage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("My SHOP"),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Shoppingcard(),
+                    ),
+                  );
+                },
+                icon: Icon(
+                  Icons.shopping_cart,
+                  size: 30,
+                )),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
